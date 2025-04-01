@@ -6,10 +6,12 @@ import Signin from './pages/Signin'
 import Signup from './pages/Signup'
 import Post from './pages/Post'
 import Dashboard from './pages/Dashboard'
+import Navbar from './components/Navbar'
 
 const App = () => {
   return (
-    <div className='text-[10rem]'>
+    <div className='max-w-[1500px] mx-auto px-[0.8rem] sm:px-[1.5rem] md:px-[3rem] lg:px-[5rem] xl-[8rem] dark:text-white light"text-[#000]'>
+      <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
