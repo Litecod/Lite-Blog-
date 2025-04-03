@@ -7,11 +7,14 @@ import Signup from './pages/Signup'
 import Post from './pages/Post'
 import Dashboard from './pages/Dashboard'
 import Navbar from './components/Navbar'
+import { ToastContainer } from 'react-toastify'
+import Footer from './components/Footer'
 
 const App = () => {
   return (
-    <div className='max-w-[1500px] mx-auto px-[0.8rem] sm:px-[1.5rem] md:px-[3rem] lg:px-[5rem] xl-[8rem] dark:text-white light"text-[#000]'>
+    <div className='max-w-[1500px] mx-auto  dark:text-white light"text-[#000]'>
       <Navbar />
+      <ToastContainer />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
@@ -20,6 +23,7 @@ const App = () => {
         <Route path='/post' element={<Post />} />
         <Route path='/dashboard' element={<Dashboard />} />
       </Routes>
+      <Footer />
     </div>
   )
 }
