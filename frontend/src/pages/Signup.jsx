@@ -1,7 +1,7 @@
-import { Spinner } from "flowbite-react";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import OAuth from "../components/OAuth";
 
 const LoadingSpinner = () => {
   return (
@@ -16,6 +16,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [passMessage, setPassMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -37,12 +38,16 @@ const Signup = () => {
       });
 
       const data = await response.json();
+      if (data) {
+        console.log(data);
+        toast.success(data);
+        setErrorMessage("");
+        setPassMessage("Sign In successful")
+      }
       if (data.success === false) {
         setErrorMessage(data.message);
         console.log(data.message);
-      } else if(data) {
-        console.log(data);
-        toast.success(data);
+        setLoading(false);
       }
 
       setLoading(false);
@@ -57,12 +62,10 @@ const Signup = () => {
     }
   };
 
-  console.log(errorMessage)
-
   return (
     <div className="min-h-screen mt-20 px-[0.8rem] sm:px-[1.5rem] md:px-[3rem] lg:px-[5rem] xl:px-[8rem]">
       <div className="flex flex-col md:flex-row p-3 max-w-3xl mx-auto items-center gap-10">
-        <div className="w-[50%]">
+        <div className="w-full md:w-[50%]">
           <Link className=" text-4xl font-semibold dark:text-white" to={"/"}>
             <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">
               Lite
@@ -74,9 +77,21 @@ const Signup = () => {
             numquam quibusdam id.
           </p>
         </div>
-        <div className="w-[50%]">
+        <div className="w-full md:w-[50%]">
           <form onSubmit={SignHandler} className="flex flex-col gap-4">
-            <p className="text-red-700">{errorMessage}</p>
+            {errorMessage === "" ? (
+              <div
+                className={`w-full py-[1rem] px-[1.5rem] bg-green-200 rounded ${
+                  passMessage === "" ? "hidden" : "block"
+                }`}
+              >
+                <p className="text-green-700">{passMessage}</p>
+              </div>
+            ) : (
+              <div className="w-full py-[1rem] px-[1.5rem] bg-red-200 rounded">
+                <p className="text-red-700">{errorMessage}</p>
+              </div>
+            )}
             <div className="">
               <label htmlFor="username">Your Username</label>
               <input
@@ -114,14 +129,19 @@ const Signup = () => {
               type="submit"
               className="bg-black text-white p-[0.5rem] rounded"
             >
-              {loading ? (<div className="flex gap-2 items-center max-w-[8rem] mx-auto">
-              <LoadingSpinner/>
-              <span>Signing In</span>
-              </div>) : "Sign Up"}
+              {loading ? (
+                <div className="flex gap-2 items-center max-w-[8rem] mx-auto">
+                  <LoadingSpinner />
+                  <span>Signing Up</span>
+                </div>
+              ) : (
+                "Sign Up"
+              )}
             </button>
+            <OAuth />
           </form>
           <div className=" flex justify-between mt-2 text-sm">
-            <p>Already have an account?</p>
+            <p>Already have an account? </p>
             <Link to="/signin" className="underline text-purple-900">
               SignIn
             </Link>
