@@ -2,7 +2,12 @@
 @plugin "flowbite-react/plugin/tailwindcss";
 @source "../.flowbite-react/class-list.json";
 
-a.active {
+/* a.active {
     color: purple;
     font-weight: 700;
-}
+} */
+/* .active {
+    background-color: #8b5100;
+    border-color: #8b5100;
+    color: #fff;
+  } */

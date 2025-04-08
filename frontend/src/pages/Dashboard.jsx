@@ -19,17 +19,18 @@ const Dashboard = () => {
 
   return (
     //px-[0.8rem] sm:px-[1.5rem] md:px-[3rem] lg:px-[5rem] xl:px-[8rem]
-    <div className='min-h-screen '>
+    <div className='min-h-screen flex flex-col sm:flex-row sm:block'>
       <div className="">
         {/* side bar */}
         <SideBar />
       </div>
-      <div className="">
+      <div className=" ">
         {/* profile */}
         {tab === "profile" && <Profile />}
       </div>
     </div>
   )
 }
+// sm:float-right
 
 export default Dashboard
